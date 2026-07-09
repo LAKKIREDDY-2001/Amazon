@@ -1,0 +1,6 @@
+{
+  "name": "Amazon Global Constellation",
+  "description": "An interactive chronological journey of Amazon offices and milestones, from Bellevue Garage to the state-of-the-art BLR37 skyscraper in Bengaluru, styled in a space trajectory universe.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
