@@ -164,10 +164,10 @@ export const DoorDeskMinigame: React.FC = () => {
                 <div className="w-48 h-4 rounded bg-amber-800/50 border border-amber-600" />
                 <div className="flex justify-between w-44 mt-1">
                   <div className="w-3 h-12 bg-amber-900/80 rounded border border-amber-700 relative">
-                    <div className="absolute top-1 left-0.5 w-1.5 h-1.5 rounded-full bg-slate-400 animate-ping" />
+                    <div className="absolute top-1 left-0.5 w-1.5 h-1.5 rounded-full bg-slate-400" />
                   </div>
                   <div className="w-3 h-12 bg-amber-900/80 rounded border border-amber-700 relative">
-                    <div className="absolute top-1 left-0.5 w-1.5 h-1.5 rounded-full bg-slate-400 animate-ping" />
+                    <div className="absolute top-1 left-0.5 w-1.5 h-1.5 rounded-full bg-slate-400" />
                   </div>
                 </div>
               </div>
@@ -232,15 +232,13 @@ export const DoorDeskMinigame: React.FC = () => {
       <button
         id="btn-desk-game-action"
         onClick={() => handleAction(stage)}
-        className="w-full py-2.5 rounded-xl font-display font-bold text-xs tracking-wider text-center uppercase cursor-pointer flex items-center justify-center gap-2 transition-all duration-300"
-        style={{
-          background: stage === "completed"
-            ? "linear-gradient(135deg, #10B981 0%, #059669 100%)"
+        className={`w-full py-2.5 rounded-xl font-display font-bold text-xs tracking-wider text-center uppercase cursor-pointer flex items-center justify-center gap-2 transition-all duration-300 border ${
+          stage === "completed"
+            ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/30 hover:bg-emerald-950/60"
             : stage === "idle"
-            ? "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)"
-            : "linear-gradient(135deg, #2563EB 0%, #1D4ED8 100%)",
-          color: "white",
-        }}
+            ? "bg-amber-950/40 text-amber-400 border-amber-500/30 hover:bg-amber-950/60"
+            : "bg-blue-950/40 text-blue-400 border-blue-500/30 hover:bg-blue-950/60"
+        }`}
       >
         {stage === "idle" && (
           <>

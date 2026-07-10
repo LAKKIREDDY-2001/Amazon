@@ -4,7 +4,7 @@ import { Constellation } from "./components/Constellation";
 import { OfficeDetailPanel } from "./components/OfficeDetailPanel";
 import { motion, AnimatePresence } from "motion/react";
 import { 
-  Rocket, 
+  Building, 
   Search, 
   Play, 
   Pause, 
@@ -16,7 +16,8 @@ import {
   Globe, 
   TrendingUp, 
   Award,
-  Zap
+  Zap,
+  Calendar
 } from "lucide-react";
 
 
@@ -32,16 +33,16 @@ const PLANET_PREVIEWS: Record<string, string> = {
   pluto: "https://pre00.deviantart.net/4677/th/pre/f/2015/314/4/e/pluto_map__2015_nov_10__by_snowfall_the_cat-d918tlb.png"
 };
 
-const PLANET_DISTANCES: Record<string, string> = {
-  seattle_garage: "0.39 AU",
-  pacmed_tower: "0.723 AU",
-  slu_campus: "1.000 AU",
-  day1_spheres: "1.524 AU",
-  hq2_helix: "5.203 AU",
-  london_principal: "9.539 AU",
-  tokyo_meguro: "19.180 AU",
-  hyderabad_campus: "30.060 AU",
-  blr37_bengaluru: "39.500 AU"
+const CHRONOLOGY_STAGES: Record<string, string> = {
+  seattle_garage: "Foundational Site",
+  pacmed_tower: "Consolidation Era",
+  slu_campus: "Urban Hub Phase",
+  day1_spheres: "Biophilic Masterpiece",
+  hq2_helix: "East Coast Hub",
+  london_principal: "UK Tech Center",
+  tokyo_meguro: "Japan HQ Peak",
+  hyderabad_campus: "APAC Mega Campus",
+  blr37_bengaluru: "Global AI Zenith"
 };
 
 export default function App() {
@@ -96,53 +97,53 @@ export default function App() {
       id="amazon-universe-app"
       className="min-h-screen space-bg text-white font-sans antialiased selection:bg-amber-500 selection:text-black pb-12"
     >
-      {/* Top Atmospheric Header Nav */}
+      {/* Top Architectural Header Nav */}
       <header className="border-b border-gray-800/80 bg-black/40 backdrop-blur-md sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-500 via-orange-600 to-amber-400 flex items-center justify-center shadow-lg shadow-orange-500/10">
-              <Rocket className="w-5 h-5 text-white animate-pulse" />
+            <div className="w-10 h-10 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+              <Building className="w-5 h-5 text-amber-500" />
             </div>
             <div>
-              <h1 className="font-display font-black text-sm tracking-[3px] text-white flex items-center gap-2 uppercase">
-                AMAZON SYSTEM CONSTELLATION
+              <h1 className="font-montserrat font-bold text-sm tracking-[3px] text-white flex items-center gap-2 uppercase">
+                AMAZON CAMPUS CHRONICLE
               </h1>
-              <p className="text-[10px] text-amber-500 font-mono tracking-wider uppercase">
-                Interactive Chronological Journey // Seattle to Present BLR37
+              <p className="text-[9px] text-amber-500 font-mono tracking-wider uppercase">
+                Interactive Architectural Portfolio & Global Milestones
               </p>
             </div>
           </div>
 
           <div className="flex items-center gap-3">
-            {/* Warp Tour Auto-Play controls */}
+            {/* Tour Auto-Play controls */}
             <button
               id="btn-auto-tour"
               onClick={() => setAutoPlay(!autoPlay)}
               className={`px-3.5 py-1.5 rounded-full text-xs font-display font-bold tracking-wider uppercase flex items-center gap-2 transition-all duration-300 cursor-pointer ${
                 autoPlay
-                  ? "bg-amber-500 text-black shadow-[0_0_15px_rgba(245,158,11,0.4)]"
+                  ? "bg-amber-500 text-black shadow-md shadow-amber-500/20"
                   : "bg-gray-900 text-gray-400 border border-gray-800 hover:border-gray-700"
               }`}
             >
               {autoPlay ? (
                 <>
                   <Pause className="w-3.5 h-3.5 text-black" />
-                  <span>WARP SPEED ACTIVE</span>
+                  <span>AUTO-PRESENTATION ACTIVE</span>
                 </>
               ) : (
                 <>
                   <Play className="w-3.5 h-3.5 text-amber-500" />
-                  <span>LAUNCH EXPEDITION</span>
+                  <span>PLAY PRESENTATION</span>
                 </>
               )}
             </button>
 
-            {/* Leadership Principles quick guide */}
+            {/* Leadership Creed quick guide */}
             <button
               id="btn-open-principles"
               onClick={() => setShowPrinciplesModal(true)}
               className="p-2 rounded-full bg-slate-900 border border-gray-800 hover:border-gray-700 hover:text-amber-400 transition-colors text-gray-300 cursor-pointer"
-              title="Leadership Principles Dictionary"
+              title="Amazon Leadership Creed"
             >
               <BookOpen className="w-4 h-4" />
             </button>
@@ -154,13 +155,13 @@ export default function App() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 mt-6">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start">
           
-          {/* LEFT COLUMN: Planetary Site Alignment (4 cols) */}
+          {/* LEFT COLUMN: Site Alignment (4 cols) */}
           <section className="lg:col-span-4 space-y-4">
             
             {/* Search filter for global hubs */}
             <div className="p-4 rounded-2xl bg-black/40 border border-gray-800/80">
               <label className="block text-[10px] text-gray-400 font-mono uppercase tracking-wider mb-2">
-                Search Global System Nodes
+                Search Global Campuses & Offices
               </label>
               <div className="relative">
                 <Search className="absolute left-3 top-2.5 w-4 h-4 text-gray-500" />
@@ -224,10 +225,10 @@ export default function App() {
                           </h2>
                         </div>
                         
-                        {/* Astro Distance & Metadata */}
+                        {/* Realistic Site Stage & Country */}
                         <h3 className="font-montserrat font-light text-[8.5px] tracking-wider uppercase mt-1 flex items-center gap-1.5"
                             style={{ color: isSelected ? hub.color : "#6b7280" }}>
-                          <span>{PLANET_DISTANCES[hub.id] || "1.000 AU"}</span>
+                          <span>{CHRONOLOGY_STAGES[hub.id] || "Global Campus"}</span>
                           <span>•</span>
                           <span className="font-mono text-zinc-500 text-[8px]">{hub.country}</span>
                         </h3>
@@ -238,7 +239,7 @@ export default function App() {
               ) : (
                 <div className="p-8 text-center bg-black/20 rounded-2xl border border-gray-900">
                   <HelpCircle className="w-8 h-8 text-gray-600 mx-auto mb-2" />
-                  <p className="text-xs text-gray-500 font-mono">No corporate planets found in this quadrant.</p>
+                  <p className="text-xs text-gray-500 font-mono">No corporate campuses found matching search query.</p>
                 </div>
               )}
             </div>
@@ -258,10 +259,10 @@ export default function App() {
             <div className="p-4 bg-black/60 border border-gray-800/60 rounded-2xl mt-4 backdrop-blur-md">
               <div className="flex justify-between items-center mb-3">
                 <span className="text-[10px] font-mono uppercase tracking-wider text-gray-400">
-                  CHRONOLOGICAL SYSTEM TRAVEL PATH
+                  CHRONOLOGICAL PROGRESSION PATH
                 </span>
                 <span className="text-[10px] font-mono text-amber-500">
-                  {activeIndex + 1} OF {AMAZON_HUBS.length} HUBS VISITED
+                  {activeIndex + 1} OF {AMAZON_HUBS.length} CAMPUSES EXPLORED
                 </span>
               </div>
               
@@ -315,7 +316,7 @@ export default function App() {
                         ←
                       </div>
                       <span className="text-[10px] font-mono font-bold tracking-widest text-white uppercase">
-                        BACK TO ORBIT
+                        BACK TO CHRONICLE
                       </span>
                     </div>
                   </motion.div>
@@ -386,7 +387,7 @@ export default function App() {
         </div>
 
         <div className="text-center text-[10px] text-gray-600 font-mono mt-8 uppercase tracking-widest">
-          SYSTEM CONSTELLATION // PRODUCED BY DEEPMIND ANTIGRAVITY ENGINE
+          AMAZON CAMPUS CHRONICLE // AN INTERACTIVE CHRONOLOGICAL JOURNAL
         </div>
       </footer>
 

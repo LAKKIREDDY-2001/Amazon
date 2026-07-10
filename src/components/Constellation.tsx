@@ -57,20 +57,20 @@ export const Constellation: React.FC<ConstellationProps> = ({
       className="relative w-full h-[540px] md:h-[640px] bg-[#020205] rounded-3xl overflow-hidden border border-gray-900/80 shadow-[inset_0_0_80px_rgba(0,0,0,0.95)] flex flex-col justify-between"
       style={{ perspective: "1500px" }}
     >
-      {/* Immersive Deep Space Stars & Nebula Overlays */}
-      <div className="absolute inset-0 space-bg opacity-45 pointer-events-none" />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/85 pointer-events-none" />
+      {/* Immersive Technical Blueprint Drafting Grid */}
+      <div className="absolute inset-0 space-bg opacity-40 pointer-events-none" />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/90 pointer-events-none" />
 
-      {/* Atmospheric Top Compass Hud */}
+      {/* Atmospheric Top Drafting Hud */}
       <div className="p-4 flex justify-between items-center z-30 pointer-events-none">
         <div className="flex items-center gap-2">
-          <Compass className="w-4 h-4 text-amber-500/80 animate-spin-slow" />
+          <Compass className="w-4 h-4 text-amber-500/80" />
           <span className="text-[9px] font-mono tracking-[4px] text-gray-400 uppercase">
-            3D PERSPECTIVE HORIZON VIEW
+            CAMPUS HORIZON VIEWER
           </span>
         </div>
         <div className="p-1 px-2.5 rounded bg-black/60 border border-gray-800 text-[8px] font-mono tracking-widest text-amber-500 uppercase">
-          {selectedHub.planetClass.toUpperCase()} ORBITAL RANGE
+          CHRONOLOGY STAGE // {selectedHub.year}
         </div>
       </div>
 
@@ -116,11 +116,22 @@ export const Constellation: React.FC<ConstellationProps> = ({
                 }}
               >
                 {/* 
-                   THE PLANET BODY
-                   Combines the custom texture background with multiple overlay glows.
+                   THE CAMPUS PORTRAIT LENS
+                   Embeds the real building photo inside a sleek circular bezel that translates in 3D space.
                 */}
-                <div className={`planet ${hub.planetClass}`}>
-                  <div className="overlay" />
+                <div 
+                  className={`planet ${hub.planetClass}`}
+                  style={{
+                    backgroundImage: `url(${hub.imageUrl})`,
+                    backgroundSize: "cover",
+                    backgroundPosition: "center",
+                    animation: "none", // Keeps the realistic campus photos perfectly upright and crisp
+                    border: "2px solid rgba(245, 158, 11, 0.4)",
+                    boxShadow: "0 -200px 150px rgba(0, 0, 0, 0.95) inset, 0 0 30px rgba(243, 144, 65, 0.15)"
+                  }}
+                >
+                  {/* Backdrop linear gradient to blend bottom of image perfectly with the canvas */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black via-black/30 to-transparent opacity-90" />
 
                   {/* Render Orbit Trajectories & Moons */}
                   {moons.map((moon, mIdx) => (
@@ -128,15 +139,25 @@ export const Constellation: React.FC<ConstellationProps> = ({
                       {/* Orbit Line */}
                       <div className={`trajectory ${moon.class === "moon" ? "m" : moon.class === "phoebos" ? "p" : moon.class === "deimos" ? "d" : moon.class === "lo" ? "lop" : moon.class === "europa" ? "eu" : "ga"}`} />
 
-                      {/* Floating Orbiting Moon Element */}
+                      {/* Floating Orbiting Landmark Pin */}
                       <div 
                         className={`moon ${moon.class} group/moon cursor-pointer`}
                         onMouseEnter={() => setHoveredMoon(`${hub.id}-${mIdx}`)}
                         onMouseLeave={() => setHoveredMoon(null)}
                       >
-                        <div className="w-5 h-5 rounded-full bg-slate-400/90 shadow-[inset_0_-4px_6px_black] group-hover/moon:scale-125 transition-transform duration-300" />
+                        {/* Elegant interactive pin indicator with real brand color accents */}
+                        <div 
+                          className="w-5 h-5 rounded-full flex items-center justify-center border transition-all duration-300 group-hover/moon:scale-125 shadow-lg"
+                          style={{
+                            borderColor: hub.color,
+                            backgroundColor: "rgba(10, 10, 12, 0.85)",
+                            boxShadow: `0 0 10px ${hub.color}30`,
+                          }}
+                        >
+                          <span className="w-2 h-2 rounded-full" style={{ backgroundColor: hub.color }} />
+                        </div>
                         
-                        {/* Moon Labels */}
+                        {/* Sub-Milestone Labels */}
                         <h3>{moon.subtitle}</h3>
                         <h2>{moon.name}</h2>
                       </div>
@@ -163,7 +184,7 @@ export const Constellation: React.FC<ConstellationProps> = ({
         >
           {/* Chapter / Location Meta */}
           <span className="text-[10px] md:text-xs font-mono tracking-[4px] text-amber-500 uppercase drop-shadow-md">
-            AMAZON CORRIDOR // NODE {activeIndex + 1}
+            CHRONOLOGICAL RECORD // STAGE 0{activeIndex + 1}
           </span>
           
           {/* Realistic Building Title */}
@@ -215,12 +236,12 @@ export const Constellation: React.FC<ConstellationProps> = ({
                 exit={{ opacity: 0, y: -10, scale: 0.95 }}
                 className="w-full bg-black/95 border border-amber-500/40 backdrop-blur-md px-4 py-3 rounded-2xl flex items-start gap-3.5 shadow-[0_8px_32px_rgba(0,0,0,0.9)]"
               >
-                <div className="w-8 h-8 rounded-full bg-amber-500/20 border border-amber-500 flex items-center justify-center text-xs shrink-0 mt-0.5">
-                  🛰️
+                <div className="w-8 h-8 rounded-full bg-amber-500/10 border border-amber-500/30 flex items-center justify-center text-xs shrink-0 mt-0.5 text-amber-500">
+                  ⚡
                 </div>
                 <div>
                   <span className="text-[9px] font-mono text-amber-400 font-bold tracking-widest uppercase block">
-                    ORBITING ARTIFACT // {moon.subtitle}
+                    DESIGN ANECDOTE // {moon.subtitle}
                   </span>
                   <span className="text-xs font-montserrat font-bold text-white block mt-0.5 uppercase tracking-wide">
                     {moon.name}
@@ -238,8 +259,8 @@ export const Constellation: React.FC<ConstellationProps> = ({
               animate={{ opacity: 0.7 }}
               className="text-[9px] font-mono text-gray-400 uppercase tracking-[2px] flex items-center justify-center gap-2 bg-black/55 px-4 py-2 rounded-full border border-gray-900 shadow-md"
             >
-              <Sparkles className="w-3.5 h-3.5 text-amber-500 animate-pulse" />
-              <span>HOVER ORBITING MOONS FOR SECRET ARCHITECTURE MARKS</span>
+              <Sparkles className="w-3.5 h-3.5 text-amber-500" />
+              <span>HOVER HISTORICAL SATELLITE NODES FOR DESIGN ANECDOTES</span>
             </motion.div>
           )}
         </AnimatePresence>
@@ -249,16 +270,15 @@ export const Constellation: React.FC<ConstellationProps> = ({
       <div className="p-4 flex justify-between items-end z-20 pointer-events-none">
         <div className="flex flex-col text-left">
           <span className="text-[8px] font-mono text-gray-500 uppercase tracking-widest">
-            SYSTEM COORDINATES
+            GEOGRAPHICAL SITE COORDINATES
           </span>
-          <span className="text-[10px] font-mono text-gray-400 uppercase mt-0.5">
-            LAT: {selectedHub.coordinates.lat.toFixed(4)}°N // LNG: {selectedHub.coordinates.lng.toFixed(4)}°E
+          <span className="text-[10px] font-mono text-gray-400 mt-0.5">
+            {selectedHub.coordinates.lat > 0 ? `${selectedHub.coordinates.lat.toFixed(4)}° N` : `${Math.abs(selectedHub.coordinates.lat).toFixed(4)}° S`}, {selectedHub.coordinates.lng > 0 ? `${selectedHub.coordinates.lng.toFixed(4)}° E` : `${Math.abs(selectedHub.coordinates.lng).toFixed(4)}° W`}
           </span>
         </div>
-        <div className="flex items-center gap-1.5 bg-black/50 px-2.5 py-1 rounded border border-gray-900/60">
-          <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="text-[8px] font-mono text-emerald-400/90 font-bold tracking-widest uppercase">
-            STATUS: ACTIVE
+        <div className="flex items-center gap-1.5 bg-black/50 px-2.5 py-1 rounded border border-gray-800">
+          <span className="text-[8px] font-mono text-amber-400 font-bold tracking-widest uppercase">
+            ARCHIVE RECORD: VERIFIED
           </span>
         </div>
       </div>

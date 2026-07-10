@@ -109,6 +109,8 @@
   color: white;
   text-transform: uppercase;
   transition: all 0.6s 0.2s;
+  background: none !important;
+  box-shadow: none !important;
 }
 
 .solar_systm .planet .moon h2 {

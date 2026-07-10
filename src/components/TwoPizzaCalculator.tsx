@@ -56,7 +56,7 @@ export const TwoPizzaCalculator: React.FC = () => {
       <div className="flex items-center justify-between mb-4 border-b border-gray-800 pb-3">
         <div>
           <h3 className="font-display font-bold text-sm tracking-wider text-sky-400 uppercase flex items-center gap-2">
-            <Pizza className="w-4 h-4 text-orange-400 animate-spin-slow" />
+            <Pizza className="w-4 h-4 text-orange-400" />
             TWO-PIZZA TEAM ESTIMATOR
           </h3>
           <p className="text-[11px] text-gray-400">
@@ -121,7 +121,7 @@ export const TwoPizzaCalculator: React.FC = () => {
         }`}>
           <p className="text-[9px] text-gray-400 uppercase font-mono mb-1">Large Pizzas Needed</p>
           <div className="flex items-center justify-center gap-2 mb-1.5">
-            <Pizza className={`w-6 h-6 ${isTooLarge ? "text-rose-400" : "text-amber-400 animate-pulse"}`} />
+            <Pizza className={`w-6 h-6 ${isTooLarge ? "text-rose-400" : "text-amber-400"}`} />
             <span className="text-2xl font-display font-black leading-none">{pizzasRequired}</span>
           </div>
           <div className="flex items-center justify-center gap-1.5 text-[10px] font-mono uppercase">

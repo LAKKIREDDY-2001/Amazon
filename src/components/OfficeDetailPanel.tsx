@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { MilestoneHub } from "../data";
+import { MilestoneHub, AMAZON_HUBS } from "../data";
 import { DoorDeskMinigame } from "./DoorDeskMinigame";
 import { TwoPizzaCalculator } from "./TwoPizzaCalculator";
 import { 
@@ -36,6 +36,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
   onClose,
 }) => {
   const [activeTab, setActiveTab] = useState<"overview" | "achievements" | "tour">("overview");
+  const activeIndex = AMAZON_HUBS.findIndex((h) => h.id === hub.id);
 
   return (
     <div
@@ -49,20 +50,20 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span
-              className="w-2.5 h-2.5 rounded-full animate-ping"
+              className="w-2.5 h-2.5 rounded-full"
               style={{ backgroundColor: hub.color }}
             />
             <span
               className="text-[10px] font-mono font-bold uppercase tracking-widest px-2 py-0.5 rounded bg-black/40 border border-gray-800"
               style={{ color: hub.color }}
             >
-              CODENAME: {hub.codename}
+              CAMPUS CODE: {hub.codename}
             </span>
           </div>
           
           <div className="flex items-center gap-2">
-            <span className="text-xs font-mono text-gray-500">
-              {hub.distance} FROM CORE
+            <span className="text-xs font-mono text-gray-400">
+              CHRONOLOGY // STAGE 0{activeIndex + 1}
             </span>
             {onClose && (
               <button
@@ -111,15 +112,15 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
           <div className="absolute bottom-3 left-4 right-4 flex justify-between items-end z-20">
             <div>
               <span className="text-[9px] font-mono text-amber-400 tracking-[3px] uppercase block font-bold drop-shadow">
-                REAL PHOTO SPOTLIGHT
+                ARCHITECTURAL PROFILE
               </span>
               <span className="text-xs font-display font-black text-white tracking-wider uppercase block mt-0.5 drop-shadow">
                 {hub.location}, {hub.country}
               </span>
             </div>
             <div className="p-2 rounded-xl bg-black/70 border border-gray-800 text-amber-500 backdrop-blur-sm shadow-lg flex items-center gap-1.5 font-mono text-[9px] uppercase tracking-wider">
-              <Camera className="w-3.5 h-3.5 animate-pulse" />
-              <span>REALISTIC VIEW</span>
+              <Camera className="w-3.5 h-3.5" />
+              <span>PHOTOGRAPHIC RECORD</span>
             </div>
           </div>
         </div>
@@ -134,7 +135,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
                 : "text-gray-400 hover:text-white"
             }`}
           >
-            OVERVIEW
+            PROFILE
           </button>
           <button
             onClick={() => setActiveTab("achievements")}
@@ -144,7 +145,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
                 : "text-gray-400 hover:text-white"
             }`}
           >
-            ACHIEVEMENTS
+            MILESTONES
           </button>
           <button
             onClick={() => setActiveTab("tour")}
@@ -154,7 +155,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
                 : "text-gray-400 hover:text-white"
             }`}
           >
-            WONDERS TOUR
+            VISITOR GUIDE
           </button>
         </div>
 
@@ -200,7 +201,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
             {/* Global Coordinates */}
             <div className="text-[10px] text-gray-500 font-mono flex items-center gap-1.5 uppercase">
               <Globe className="w-3.5 h-3.5 text-gray-600" />
-              <span>ALIGNMENT SECTOR: {hub.coordinates.lat.toFixed(4)}°N // {hub.coordinates.lng.toFixed(4)}°E</span>
+              <span>GEOGRAPHICAL SITE LOCATION: {hub.coordinates.lat > 0 ? `${hub.coordinates.lat.toFixed(4)}° N` : `${Math.abs(hub.coordinates.lat).toFixed(4)}° S`}, {hub.coordinates.lng > 0 ? `${hub.coordinates.lng.toFixed(4)}° E` : `${Math.abs(hub.coordinates.lng).toFixed(4)}° W`}</span>
             </div>
           </div>
         )}
@@ -212,7 +213,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
             {/* List of 3 Historic Breakthroughs / Accomplishments */}
             <div className="space-y-4">
               <h2 className="text-xs font-display font-bold tracking-wider text-gray-400 uppercase flex items-center gap-2">
-                <Award className="w-4 h-4 text-amber-500 animate-pulse" />
+                <Award className="w-4 h-4 text-amber-500" />
                 HISTORIC BREAKTHROUGHS & SCALE
               </h2>
               
@@ -242,7 +243,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
             <div className="space-y-3">
               <h2 className="text-xs font-display font-bold tracking-wider text-gray-400 uppercase flex items-center gap-2">
                 <Shield className="w-4 h-4 text-sky-400" />
-                OFFICE METRICS
+                CAMPUS & SPACE STATISTICS
               </h2>
               <div className="grid grid-cols-2 gap-2.5">
                 {hub.stats.map((stat, idx) => (
@@ -263,7 +264,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
           </div>
         )}
 
-        {/* TAB 3: WONDERS OF AMAZON TOUR GUIDE */}
+        {/* TAB 3: EXECUTIVE VISITOR GUIDE */}
         {activeTab === "tour" && (
           <div className="space-y-6 animate-fade-in">
             
@@ -274,27 +275,27 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
               </div>
               
               <span className="text-[9px] font-mono text-amber-500 tracking-[4px] uppercase block">
-                AMAZONIAN PASSPORT PORTAL
+                EXECUTIVE VISITOR DIRECTIVE
               </span>
               <h2 className="text-lg font-display font-black tracking-widest text-white uppercase mt-1">
-                WONDERS OF AMAZON
+                CAMPUS ARCHITECTURE TOUR
               </h2>
               <p className="text-[10px] font-mono text-gray-400 uppercase mt-1.5 max-w-xs mx-auto leading-normal">
-                An employee guide to touring the world's most innovative corporate habitats freely.
+                An employee guide to touring the world's most innovative corporate habitats.
               </p>
             </div>
 
             {/* Immersive Wonders Story */}
             <div className="p-4 bg-black/40 rounded-2xl border border-gray-900 leading-relaxed text-xs text-gray-300 space-y-3">
               <p className="font-bold text-amber-400/90 flex items-center gap-1.5">
-                <Compass className="w-3.5 h-3.5 animate-spin-slow" />
-                THE GLOBAL TOUR GUIDE
+                <Compass className="w-3.5 h-3.5" />
+                EXECUTIVE VISITOR DIRECTIVE
               </p>
               <p>
-                As a global Amazonian with an active **Standard Blue Badge**, some of the world's most spectacular architectural masterpieces, cloud server brain centers, and biophilic gardens are open for you to visit freely.
+                As a global Amazonian with an active corporate credential, some of the world's most spectacular architectural masterpieces, cloud server brain centers, and biophilic gardens are open for you to inspect and experience.
               </p>
               <p>
-                From the lush tropical canopy of the Seattle Spheres to the mountain hiking paths of the Arlington Helix, you can tour these "Wonders" of the Amazon system without prior security clearance—simply badge in or book temporary hotel desks on the internal network.
+                From the lush tropical canopy of the Seattle Spheres to the mountain hiking paths of the Arlington Helix, you can tour these core historical campuses without prior custom clearance—simply badge in or reserve workspace using the internal network.
               </p>
             </div>
 
@@ -309,7 +310,7 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
               <div className="p-4 bg-slate-900/60 rounded-xl border border-gray-800/80 space-y-3.5">
                 <div>
                   <span className="text-[9px] font-mono text-gray-500 uppercase block">
-                    Wonder Classification:
+                    Campus Architectural Class:
                   </span>
                   <span className="text-sm font-display font-bold text-amber-400 tracking-wider uppercase block mt-0.5">
                     {hub.tourGuide.headline}
@@ -318,17 +319,17 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
 
                 <div className="border-t border-gray-800/80 pt-3">
                   <span className="text-[9px] font-mono text-gray-500 uppercase block">
-                    Global Badge Access Level:
+                    Required Credentials:
                   </span>
                   <span className="text-xs font-mono font-bold text-emerald-400 flex items-center gap-1.5 mt-0.5 uppercase">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
                     {hub.tourGuide.badgeAccess}
                   </span>
                 </div>
 
                 <div className="border-t border-gray-800/80 pt-3">
                   <span className="text-[9px] font-mono text-gray-500 uppercase block">
-                    Travel Advisor & Visitor Tips:
+                    Site Visit Advisory:
                   </span>
                   <p className="text-[11px] text-gray-300 leading-relaxed mt-1.5 font-sans">
                     {hub.tourGuide.visitorTips}
@@ -373,33 +374,31 @@ export const OfficeDetailPanel: React.FC<OfficeDetailPanelProps> = ({
               : "text-gray-300 border-gray-800 hover:border-gray-700 bg-slate-900/50"
           }`}
         >
-          Previous Hub
+          PREVIOUS HUB
         </button>
 
         <div className="flex items-center gap-1 font-mono text-xs text-gray-500">
-          <span>COSMIC PROGRESS</span>
+          <span>CHRONOLOGICAL TIMELINE</span>
         </div>
 
         <button
           id="btn-next-hub"
           onClick={onNext}
-          className="px-5 py-2 rounded-xl text-xs font-display font-bold uppercase tracking-wider flex items-center gap-2 transition-all duration-300 cursor-pointer shadow-lg"
-          style={{
-            background: isLast
-              ? "linear-gradient(135deg, #10B981 0%, #059669 100%)"
-              : "linear-gradient(135deg, #F3904F 0%, #3B429F 100%)",
-            color: "white",
-          }}
+          className={`px-5 py-2 rounded-xl text-xs font-display font-bold uppercase tracking-wider flex items-center gap-2 transition-all duration-300 cursor-pointer shadow-lg border ${
+            isLast
+              ? "bg-emerald-950/40 text-emerald-400 border-emerald-500/30 hover:bg-emerald-950/70"
+              : "bg-amber-950/40 text-amber-400 border-amber-500/30 hover:bg-amber-950/70"
+          }`}
         >
           {isLast ? (
             <>
-              <span>Begin Anew</span>
-              <ArrowRight className="w-3.5 h-3.5 animate-pulse" />
+              <span>RESTART CHRONICLE</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </>
           ) : (
             <>
-              <span>Travel Next</span>
-              <Zap className="w-3.5 h-3.5 animate-bounce" />
+              <span>NEXT CAMPUS HUB</span>
+              <ArrowRight className="w-3.5 h-3.5" />
             </>
           )}
         </button>
